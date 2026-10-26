@@ -1,4 +1,4 @@
-const CACHE='memo-shell-online-v2';
+const CACHE='memo-shell-online-v3';
 const SCOPE=new URL(self.registration.scope);
 const INDEX_URL=new URL('index.html',SCOPE).href;
 const CORE=['index.html','tasks.html','tasks-store.js','supabase.js','cloud-config.js','cloud-sync.js','manifest.webmanifest','icon.svg'].map(name=>new URL(name,SCOPE).href);
