@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "나의 메모장",
+  "short_name": "메모장",
+  "description": "PC와 휴대폰에서 함께 쓰는 개인 메모장",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f8fa",
+  "theme_color": "#285ee8",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
