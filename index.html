@@ -215,4 +215,45 @@ const main=document.querySelector('main'),layout=document.querySelector('.layout
 <script src="./supabase.js"></script>
 <script src="./cloud-config.js"></script><script src="./cloud-sync.js"></script><script id="aside-mark-app-ready">document.body.classList.add("aside-app-ready");</script>
 <script id="aside-mark-tasks-ready">(()=>{const mark=()=>document.body.classList.add("aside-tasks-ready");const f=document.getElementById("side-task-frame");if(!f)return;if(f.contentDocument?.readyState==="complete")mark();else f.addEventListener("load",mark,{once:true})})();</script>
-<script id="aside-mobile-install-v1">(()=>{const header=document.querySelector('main>header>div');if(!header||document.getElementById('aside-mobile-install-button'))return;let installPrompt=null;const button=document.createElement('button');button.id='aside-mobile-install-button';button.type='button';button.textContent='휴대폰 앱 설치';button.setAttribute('aria-label','휴대폰에 메모장 앱 설치');button.title='웹앱을 휴대폰 홈 화면에 추가합니다. APK가 아닙니다.';const installed=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;const hideButton=()=>{button.hidden=true;try{localStorage.setItem('aside-pwa-install-done-v1','1')}catch(e){}};if(installed())hideButton();window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;button.hidden=installed()});window.addEventListener('appinstalled',hideButton);const guide=document.createElement('dialog');guide.id='aside-mobile-install-guide';guide.innerHTML='<h2>휴대폰에 설치하기</h2><p id="aside-mobile-install-copy"></p><button type="button" id="aside-mobile-install-close">확인</button>';document.body.append(guide);guide.querySelector('#aside-mobile-install-close').addEventListener('click',()=>guide.close());guide.addEventListener('click',event=>{if(event.target===guide)guide.close()});button.addEventListener('click',async()=>{if(installed()){hideButton();return}if(installPrompt){await installPrompt.prompt();const choice=await installPrompt.userChoice;installPrompt=null;if(choice?.outcome==='accepted')hideButton();return}const text=guide.querySelector('#aside-mobile-install-copy');if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){text.textContent='Safari에서 공유 버튼을 누르고 “홈 화면에 추가”를 선택한 뒤 추가하세요. 홈 화면에서 메모장을 열면 설치 버튼은 사라집니다.'}else if(/SamsungBrowser/i.test(navigator.userAgent)){text.textContent='삼성 인터넷 메뉴(≡ 또는 ⋮)를 열고 “현재 페이지 추가” 또는 “홈 화면에 추가”를 선택하세요. 설치 후 홈 화면 아이콘으로 열면 이 버튼은 사라집니다.'}else{text.textContent='Chrome 메뉴(⋮)에서 “앱 설치” 또는 “홈 화면에 추가”를 선택하세요. 설치가 끝나면 홈 화면 아이콘으로 열 때 설치 버튼이 사라집니다. 이 앱은 PWA이며 APK가 아닙니다.'}if(typeof guide.showModal==='function')guide.showModal();else alert(text.textContent)});header.prepend(button)})();</script></body></html>
+<script id="aside-mobile-install-v1">(()=>{const header=document.querySelector('main>header>div');if(!header||document.getElementById('aside-mobile-install-button'))return;let installPrompt=null;const button=document.createElement('button');button.id='aside-mobile-install-button';button.type='button';button.textContent='휴대폰 앱 설치';button.setAttribute('aria-label','휴대폰에 메모장 앱 설치');button.title='웹앱을 휴대폰 홈 화면에 추가합니다. APK가 아닙니다.';const installed=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;const hideButton=()=>{button.hidden=true;try{localStorage.setItem('aside-pwa-install-done-v1','1')}catch(e){}};if(installed())hideButton();window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;button.hidden=installed()});window.addEventListener('appinstalled',hideButton);const guide=document.createElement('dialog');guide.id='aside-mobile-install-guide';guide.innerHTML='<h2>휴대폰에 설치하기</h2><p id="aside-mobile-install-copy"></p><button type="button" id="aside-mobile-install-close">확인</button>';document.body.append(guide);guide.querySelector('#aside-mobile-install-close').addEventListener('click',()=>guide.close());guide.addEventListener('click',event=>{if(event.target===guide)guide.close()});button.addEventListener('click',async()=>{if(installed()){hideButton();return}if(installPrompt){await installPrompt.prompt();const choice=await installPrompt.userChoice;installPrompt=null;if(choice?.outcome==='accepted')hideButton();return}const text=guide.querySelector('#aside-mobile-install-copy');if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){text.textContent='Safari에서 공유 버튼을 누르고 “홈 화면에 추가”를 선택한 뒤 추가하세요. 홈 화면에서 메모장을 열면 설치 버튼은 사라집니다.'}else if(/SamsungBrowser/i.test(navigator.userAgent)){text.textContent='삼성 인터넷 메뉴(≡ 또는 ⋮)를 열고 “현재 페이지 추가” 또는 “홈 화면에 추가”를 선택하세요. 설치 후 홈 화면 아이콘으로 열면 이 버튼은 사라집니다.'}else{text.textContent='Chrome 메뉴(⋮)에서 “앱 설치” 또는 “홈 화면에 추가”를 선택하세요. 설치가 끝나면 홈 화면 아이콘으로 열 때 설치 버튼이 사라집니다. 이 앱은 PWA이며 APK가 아닙니다.'}if(typeof guide.showModal==='function')guide.showModal();else alert(text.textContent)});header.prepend(button)})();</script><style id="aside-mobile-compact-v3">
+@media(max-width:850px){
+html,body{font-size:13px!important;line-height:1.4!important;overflow-x:hidden!important}
+body{padding-bottom:calc(56px + env(safe-area-inset-bottom))!important}
+body>main{padding:5px 8px calc(60px + env(safe-area-inset-bottom))!important;gap:5px!important}
+main>header{padding-top:27px!important;padding-bottom:5px!important;margin-bottom:4px!important;gap:6px!important}
+main>header h1{font-size:20px!important;line-height:1.2!important}
+main>header>div{gap:5px!important}
+main>header>div button{min-height:35px!important;padding:5px 6px!important;font-size:11px!important;line-height:1.2!important}
+main>p:first-of-type{font-size:11px!important;line-height:1.3!important;margin:0 0 5px!important}
+.app-with-tasks{gap:6px!important;margin-top:3px!important}
+.app-with-tasks>.workspace{gap:6px!important;padding-bottom:4px!important}
+.app-with-tasks>.workspace>.tabcontent{padding:8px!important;border-radius:12px!important}
+.app-with-tasks>.workspace>.tabcontent>.layout{gap:8px!important}
+.app-with-tasks>.workspace>.tabcontent h2{font-size:15px!important;line-height:1.25!important;margin:4px 0 7px!important}
+.app-with-tasks>.workspace>.tabcontent h3{font-size:13px!important;line-height:1.25!important}
+.app-with-tasks>.workspace>.tabcontent p,.app-with-tasks>.workspace>.tabcontent small,.app-with-tasks>.workspace>.tabcontent label{font-size:11px!important;line-height:1.4!important}
+.app-with-tasks>.workspace>.tabcontent button{min-height:34px!important;padding:6px 8px!important;font-size:11px!important;line-height:1.2!important}
+.app-with-tasks>.workspace>.tabcontent input,.app-with-tasks>.workspace>.tabcontent textarea,.app-with-tasks>.workspace>.tabcontent select{min-height:34px!important;padding:6px 8px!important;font-size:15px!important;line-height:1.3!important}
+#panel-memo.aside-input-only h2.panel-title{font-size:15px!important;margin:0 0 7px!important}
+#panel-memo.aside-input-only .editor-category{gap:4px 7px!important;margin:0 0 7px!important}
+#panel-memo.aside-input-only #title{font-size:16px!important;margin:0 0 6px!important;padding:7px 9px!important}
+#panel-memo.aside-input-only #body{height:27vh!important;min-height:150px!important;max-height:34vh!important;padding:9px!important;line-height:1.5!important}
+.app-with-tasks>.workspace>.tabnav{gap:3px!important;padding:4px 6px calc(4px + env(safe-area-inset-bottom))!important}
+.app-with-tasks>.workspace>.tabnav button{height:42px!important;min-height:42px!important;padding:4px 2px!important;font-size:11px!important;line-height:1.1!important}
+.calendar{margin:6px 0!important;padding:8px!important;border-radius:10px!important}
+.calhead{gap:5px!important}
+.calhead h2{font-size:14px!important;margin:0!important}
+.calhead button{min-height:30px!important;padding:4px 7px!important}
+.calgrid{gap:2px!important;min-width:0!important}
+.weekday{padding:3px 0!important;font-size:10px!important}
+.day{min-height:29px!important;padding:3px 0!important;font-size:11px!important}
+#record-upload-box{margin-top:8px!important;padding:9px!important;border-radius:10px!important}
+#record-upload-box h3{font-size:13px!important}
+#record-upload-box .record-upload-help,#record-upload-status{font-size:10px!important;line-height:1.35!important}
+#record-upload-box button{min-height:32px!important;padding:5px 8px!important;font-size:11px!important}
+.side-tasks iframe{height:260px!important;min-height:220px!important}
+#aside-mobile-install-button{min-height:36px!important}
+}
+@media(max-width:390px){body>main{padding-left:6px!important;padding-right:6px!important}.app-with-tasks>.workspace>.tabcontent{padding:7px!important}.app-with-tasks>.workspace>.tabnav button{font-size:10px!important}.day{min-height:26px!important}}
+</style>
+</body></html>
