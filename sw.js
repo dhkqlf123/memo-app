@@ -1,7 +1,7 @@
-const CACHE='memo-shell-online-v4';
+const CACHE='memo-shell-online-v5';
 const SCOPE=new URL(self.registration.scope);
 const INDEX_URL=new URL('index.html',SCOPE).href;
-const CORE=['index.html','tasks.html','tasks-store.js','supabase.js','cloud-config.js','cloud-sync.js','manifest.webmanifest','icon.svg'].map(name=>new URL(name,SCOPE).href);
+const CORE=['index.html','tasks.html','tasks-store.js','supabase.js','cloud-config.js','cloud-sync.js','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png'].map(name=>new URL(name,SCOPE).href);
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
